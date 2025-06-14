@@ -32,7 +32,7 @@ const SearchFilters = ({ filters, onFiltersChange }: SearchFiltersProps) => {
     'Gemüsegarten', 'Werkstatt', 'Digitales Lernen', 'Schwimmbad', 'Forscherraum', 'Turnhalle'
   ];
 
-  const updateFilters = (updates: Partial<SearchFilters>) => {
+  const updateFilters = (updates: Partial<SearchFiltersState>) => {
     onFiltersChange({ ...filters, ...updates });
   };
 

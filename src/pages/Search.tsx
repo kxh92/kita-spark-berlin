@@ -8,7 +8,7 @@ import KitaCard from '@/components/KitaCard';
 import { supabase } from '@/integrations/supabase/client';
 import { Loader2 } from 'lucide-react';
 
-interface SearchFilters {
+interface SearchFiltersState {
   query: string;
   bezirk: string;
   ageMin: number;
@@ -18,7 +18,7 @@ interface SearchFilters {
 
 const Search = () => {
   const [searchParams] = useSearchParams();
-  const [filters, setFilters] = useState<SearchFilters>({
+  const [filters, setFilters] = useState<SearchFiltersState>({
     query: searchParams.get('q') || '',
     bezirk: searchParams.get('bezirk') || '',
     ageMin: 0,

@@ -6,7 +6,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
 
-interface SearchFilters {
+interface SearchFiltersState {
   query: string;
   bezirk: string;
   ageMin: number;
@@ -15,8 +15,8 @@ interface SearchFilters {
 }
 
 interface SearchFiltersProps {
-  filters: SearchFilters;
-  onFiltersChange: (filters: SearchFilters) => void;
+  filters: SearchFiltersState;
+  onFiltersChange: (filters: SearchFiltersState) => void;
 }
 
 const SearchFilters = ({ filters, onFiltersChange }: SearchFiltersProps) => {

@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut, Heart, FileText } from "lucide-react";
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,10 +30,10 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">
+            <a href="/search" className="text-gray-700 hover:text-primary transition-colors font-medium">
               Kita-Vergleich
             </a>
-            <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">
+            <a href="/search" className="text-gray-700 hover:text-primary transition-colors font-medium">
               Bezirke
             </a>
             <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">
@@ -48,6 +48,14 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-3">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => navigate('/dashboard')}
+                  className="text-gray-700 hover:text-primary"
+                >
+                  <Heart size={18} className="mr-1" />
+                  Dashboard
+                </Button>
                 <div className="flex items-center space-x-2 text-gray-700">
                   <User size={18} />
                   <span className="text-sm">{user.email}</span>
@@ -93,10 +101,10 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-gray-200/20">
             <nav className="flex flex-col space-y-4 mt-4">
-              <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">
+              <a href="/search" className="text-gray-700 hover:text-primary transition-colors font-medium">
                 Kita-Vergleich
               </a>
-              <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">
+              <a href="/search" className="text-gray-700 hover:text-primary transition-colors font-medium">
                 Bezirke
               </a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">
@@ -108,7 +116,15 @@ const Header = () => {
               <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200/20">
                 {user ? (
                   <div className="space-y-2">
-                    <div className="flex items-center space-x-2 text-gray-700 text-sm">
+                    <Button 
+                      variant="ghost" 
+                      className="text-gray-700 hover:text-primary justify-start"
+                      onClick={() => navigate('/dashboard')}
+                    >
+                      <Heart size={18} className="mr-1" />
+                      Dashboard
+                    </Button>
+                    <div className="flex items-center space-x-2 text-gray-700 text-sm px-3">
                       <User size={18} />
                       <span>{user.email}</span>
                     </div>

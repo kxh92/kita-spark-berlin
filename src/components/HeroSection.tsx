@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -8,12 +9,20 @@ import { Search, MapPin, Star, Users } from "lucide-react";
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBezirk, setSelectedBezirk] = useState('');
+  const navigate = useNavigate();
 
   const bezirke = [
     'Mitte', 'Friedrichshain-Kreuzberg', 'Pankow', 'Charlottenburg-Wilmersdorf',
     'Spandau', 'Steglitz-Zehlendorf', 'Tempelhof-Schöneberg', 'Neukölln',
     'Treptow-Köpenick', 'Marzahn-Hellersdorf', 'Lichtenberg', 'Reinickendorf'
   ];
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set('q', searchQuery);
+    if (selectedBezirk) params.set('bezirk', selectedBezirk);
+    navigate(`/search?${params.toString()}`);
+  };
 
   return (
     <section className="pt-20 pb-16 bg-gradient-to-br from-primary-50 via-white to-primary-100 min-h-screen flex items-center">
@@ -54,6 +63,7 @@ const HeroSection = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10 border-gray-200/50 bg-white/50 h-12"
+                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                   />
                   <Search className="absolute left-3 top-3 h-6 w-6 text-gray-400" />
                 </div>
@@ -74,7 +84,10 @@ const HeroSection = () => {
                   </SelectContent>
                 </Select>
 
-                <Button className="bg-primary hover:bg-primary-600 text-white h-12 font-semibold">
+                <Button 
+                  className="bg-primary hover:bg-primary-600 text-white h-12 font-semibold"
+                  onClick={handleSearch}
+                >
                   Kitas vergleichen →
                 </Button>
               </div>
@@ -85,6 +98,7 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="bg-primary hover:bg-primary-600 text-white font-semibold text-lg px-8 py-3 rounded-2xl"
+                onClick={handleSearch}
               >
                 Kitas vergleichen →
               </Button>
@@ -92,6 +106,7 @@ const HeroSection = () => {
                 size="lg" 
                 variant="outline" 
                 className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold text-lg px-8 py-3 rounded-2xl"
+                onClick={() => navigate('/search')}
               >
                 Platzangebote erhalten →
               </Button>

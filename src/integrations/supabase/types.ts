@@ -9,6 +9,157 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      applications: {
+        Row: {
+          child_birth_date: string
+          child_name: string
+          created_at: string | null
+          id: string
+          kita_id: string
+          message: string | null
+          parent_email: string
+          parent_name: string
+          parent_phone: string
+          preferred_start_date: string
+          status: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          child_birth_date: string
+          child_name: string
+          created_at?: string | null
+          id?: string
+          kita_id: string
+          message?: string | null
+          parent_email: string
+          parent_name: string
+          parent_phone: string
+          preferred_start_date: string
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          child_birth_date?: string
+          child_name?: string
+          created_at?: string | null
+          id?: string
+          kita_id?: string
+          message?: string | null
+          parent_email?: string
+          parent_name?: string
+          parent_phone?: string
+          preferred_start_date?: string
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_kita_id_fkey"
+            columns: ["kita_id"]
+            isOneToOne: false
+            referencedRelation: "kitas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      favorites: {
+        Row: {
+          created_at: string | null
+          id: string
+          kita_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          kita_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          kita_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_kita_id_fkey"
+            columns: ["kita_id"]
+            isOneToOne: false
+            referencedRelation: "kitas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kitas: {
+        Row: {
+          address: string
+          age_max: number | null
+          age_min: number | null
+          bezirk: string
+          capacity: number | null
+          created_at: string | null
+          description: string | null
+          email: string | null
+          features: string[] | null
+          id: string
+          image_url: string | null
+          languages: string[] | null
+          latitude: number | null
+          longitude: number | null
+          name: string
+          opening_hours: Json | null
+          phone: string | null
+          updated_at: string | null
+          website: string | null
+        }
+        Insert: {
+          address: string
+          age_max?: number | null
+          age_min?: number | null
+          bezirk: string
+          capacity?: number | null
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          languages?: string[] | null
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          opening_hours?: Json | null
+          phone?: string | null
+          updated_at?: string | null
+          website?: string | null
+        }
+        Update: {
+          address?: string
+          age_max?: number | null
+          age_min?: number | null
+          bezirk?: string
+          capacity?: number | null
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          languages?: string[] | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          opening_hours?: Json | null
+          phone?: string | null
+          updated_at?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -35,6 +186,47 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      reviews: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: string
+          kita_id: string
+          rating: number
+          title: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          kita_id: string
+          rating: number
+          title?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          kita_id?: string
+          rating?: number
+          title?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_kita_id_fkey"
+            columns: ["kita_id"]
+            isOneToOne: false
+            referencedRelation: "kitas"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
